@@ -1,12 +1,19 @@
 var {regStudentDAO,getStudentDAO} = require('../dao/studentDAO')
-function regStudentService(){
+async function regStudentService(data){
 console.log("regStudentService")
-regStudentDAO();
+var result = await regStudentDAO(data);
+console.log('service receive the result from dao send to controller')
+return result;
 }
 
-function getStudentService(){
+async function getStudentService(){
 console.log("getStudentService")
-getStudentDAO();
+var result = await getStudentDAO();
+result = result.map((obj)=> {
+    delete obj.pwd
+    return obj;
+})
+return result;
 }
 
 module.exports = {
