@@ -31,16 +31,25 @@ async function updateStudentDAO(id, data) {
     return result;
 }
 
-async function deleteStudentDAO(id, data) {
+async function deleteStudentDAO(id) {
     var db = await getDBCon();
     var collection = db.collection("students")
     var result = await collection.deleteOne({ _id: new ObjectId(id) })
     return result;
 }
+async function getStdByIdDAO(id) {
+    var db = await getDBCon();
+    var collection = db.collection("students")
+    var result = await collection.findOne({ _id: new ObjectId(id) })
+    return result;
+}
+
 module.exports = {
     regStudentDAO,
     getStudentDAO,
     loginDAO,
     updateStudentDAO,
-    deleteStudentDAO
+    deleteStudentDAO,
+    getStdByIdDAO
+    
 }
