@@ -4,13 +4,15 @@ function validateToken(req,res,next){
     if(token){
         jwt.verify(token,"appToken",function(e,s){
             if(e){
-                res.send("Invalid Token")
+                throw new Error("Invalid Token")
+                //res.send("Invalid Token")
             }else{
                 next();
             }
         })
     }else{
-        res.send("token missing")
+        throw new Error("Token Missing")
+        //res.send("token missing")
     }
 }
 module.exports = validateToken
